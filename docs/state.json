@@ -1,0 +1,108 @@
+{
+  "project": "Catraca",
+  "prd": "docs/PRD.md",
+  "status_values": [
+    "pending",
+    "implementing",
+    "evaluating",
+    "fixing",
+    "done"
+  ],
+  "features": {
+    "F01": {
+      "name": "Fundação, harness e contas",
+      "wave": 1,
+      "depends_on": [],
+      "folder": "docs/features/F01-fundacao-contas",
+      "branch": "feat/F01-fundacao-contas",
+      "status": "pending",
+      "pr": null,
+      "latest_report": null,
+      "reports": []
+    },
+    "F02": {
+      "name": "Eventos do organizador e vitrine",
+      "wave": 2,
+      "depends_on": [
+        "F01"
+      ],
+      "folder": "docs/features/F02-eventos-vitrine",
+      "branch": "feat/F02-eventos-vitrine",
+      "status": "pending",
+      "pr": null,
+      "latest_report": null,
+      "reports": []
+    },
+    "F03": {
+      "name": "Compra de ingressos e gateway simulado",
+      "wave": 3,
+      "depends_on": [
+        "F01",
+        "F02"
+      ],
+      "folder": "docs/features/F03-compra-gateway",
+      "branch": "feat/F03-compra-gateway",
+      "status": "pending",
+      "pr": null,
+      "latest_report": null,
+      "reports": []
+    },
+    "F04": {
+      "name": "API de parceiros",
+      "wave": 4,
+      "depends_on": [
+        "F02",
+        "F03"
+      ],
+      "folder": "docs/features/F04-api-parceiros",
+      "branch": "feat/F04-api-parceiros",
+      "status": "pending",
+      "pr": null,
+      "latest_report": null,
+      "reports": []
+    },
+    "F05": {
+      "name": "Check-in e painel",
+      "wave": 4,
+      "depends_on": [
+        "F02",
+        "F03"
+      ],
+      "folder": "docs/features/F05-checkin-painel",
+      "branch": "feat/F05-checkin-painel",
+      "status": "pending",
+      "pr": null,
+      "latest_report": null,
+      "reports": []
+    },
+    "F06": {
+      "name": "Cancelamento de evento",
+      "wave": 4,
+      "depends_on": [
+        "F02",
+        "F03"
+      ],
+      "folder": "docs/features/F06-cancelamento",
+      "branch": "feat/F06-cancelamento",
+      "status": "pending",
+      "pr": null,
+      "latest_report": null,
+      "reports": []
+    },
+    "F07": {
+      "name": "Integração ponta a ponta",
+      "wave": 5,
+      "depends_on": [
+        "F04",
+        "F05",
+        "F06"
+      ],
+      "folder": "docs/features/F07-integracao-e2e",
+      "branch": "feat/F07-integracao-e2e",
+      "status": "pending",
+      "pr": null,
+      "latest_report": null,
+      "reports": []
+    }
+  }
+}
