@@ -10,7 +10,7 @@ Leia este arquivo antes de qualquer tarefa. A fonte da verdade do produto é `do
 | `./scripts/up.sh` (`npm run up`) | Sobe `db` + `app` com Docker Compose (`up -d --build --wait`). O app migra, roda a seed e só então fica healthy. Imprime `WEB`/`API` (padrão `http://localhost:3000`). |
 | `./scripts/down.sh` (`npm run down`) | Derruba tudo que o `up` subiu (mantém o volume do banco). `./scripts/down.sh --clean` também apaga o volume. |
 | `./scripts/gates.sh` (`npm run gates`) | Quality gates: `npm run check` (sintaxe de todo `.js`/`.mjs` em `src`, `test`, `scripts`) + `npm test` (`node:test`) num projeto Compose isolado `catraca-gates` (banco próprio, sem portas no host, `GATEWAY_DELAY_SCALE=0.01`). Propaga o exit code e sempre derruba com `down -v`. Em worktrees paralelas use `GATES_PROJECT=catraca-gates-<fxx>` para não colidir. |
-| `npm run e2e` | Fluxo ponta a ponta do avaliador (`scripts/e2e-flow.mjs`, entregue por F07) contra o ambiente de pé. |
+| `npm run e2e` | Fluxo ponta a ponta do avaliador (`scripts/e2e-flow.mjs`, F07): passos 2–16 pela web (cookie jar por ator, `redirect: 'manual'`) e pela API, no modo padrão do gateway (~2 min), contra o ambiente de pé (`./scripts/up.sh`). Imprime `✔ passo N — ...` e sai ≠ 0 no primeiro `✘`. Variáveis `WEB`/`API` (padrão `http://localhost:3000`) e `KEY` (padrão `catraca-parceiro-dev`). Repetível sem derrubar o ambiente. Mudança em rota, mensagem ou gancho `data-*` usado pelo fluxo → atualizar o script e rodá-lo. |
 | `npm run migrate` / `npm run seed` | Migrações / seed idempotente (dentro do container: `docker compose exec app node src/db/seed.js`). |
 
 Ambientes paralelos (ex.: uma worktree por feature): `COMPOSE_PROJECT_NAME=catraca-f04 PORT=3104 ./scripts/up.sh` e o mesmo
@@ -45,7 +45,8 @@ Ambientes paralelos (ex.: uma worktree por feature): `COMPOSE_PROJECT_NAME=catra
 | Relatórios de avaliação (imutáveis) | `docs/features/<FXX-slug>/eval-report-<timestamp>.md` |
 | Estado de cada feature (status, último relatório) | `docs/state.json` (só o orquestrador edita) |
 | Processo e template de avaliação | `docs/evaluation/` |
-| Como rodar, endereços e credenciais | `README.md` |
+| Fluxo ponta a ponta do avaliador (passos 2–16) | `scripts/e2e-flow.mjs` (`npm run e2e`) |
+| Como rodar, endereços, credenciais e decisões | `README.md` |
 
 ## Fluxo de trabalho por feature
 
