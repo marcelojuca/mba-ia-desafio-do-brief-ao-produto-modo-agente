@@ -4,7 +4,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
-compose=(docker compose -p catraca-gates -f docker-compose.gates.yml)
+compose=(docker compose -p "${GATES_PROJECT:-catraca-gates}" -f docker-compose.gates.yml)
 
 cleanup() {
   "${compose[@]}" down -v --remove-orphans >/dev/null 2>&1 || true

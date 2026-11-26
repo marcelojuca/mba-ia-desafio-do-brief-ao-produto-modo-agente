@@ -9,7 +9,7 @@ Leia este arquivo antes de qualquer tarefa. A fonte da verdade do produto é `do
 |---|---|
 | `./scripts/up.sh` (`npm run up`) | Sobe `db` + `app` com Docker Compose (`up -d --build --wait`). O app migra, roda a seed e só então fica healthy. Imprime `WEB`/`API` (padrão `http://localhost:3000`). |
 | `./scripts/down.sh` (`npm run down`) | Derruba tudo que o `up` subiu (mantém o volume do banco). `./scripts/down.sh --clean` também apaga o volume. |
-| `./scripts/gates.sh` (`npm run gates`) | Quality gates: `npm run check` (sintaxe de todo `.js`/`.mjs` em `src`, `test`, `scripts`) + `npm test` (`node:test`) num projeto Compose isolado `catraca-gates` (banco próprio, sem portas no host, `GATEWAY_DELAY_SCALE=0.01`). Propaga o exit code e sempre derruba com `down -v`. |
+| `./scripts/gates.sh` (`npm run gates`) | Quality gates: `npm run check` (sintaxe de todo `.js`/`.mjs` em `src`, `test`, `scripts`) + `npm test` (`node:test`) num projeto Compose isolado `catraca-gates` (banco próprio, sem portas no host, `GATEWAY_DELAY_SCALE=0.01`). Propaga o exit code e sempre derruba com `down -v`. Em worktrees paralelas use `GATES_PROJECT=catraca-gates-<fxx>` para não colidir. |
 | `npm run e2e` | Fluxo ponta a ponta do avaliador (`scripts/e2e-flow.mjs`, entregue por F07) contra o ambiente de pé. |
 | `npm run migrate` / `npm run seed` | Migrações / seed idempotente (dentro do container: `docker compose exec app node src/db/seed.js`). |
 
