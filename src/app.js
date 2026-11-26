@@ -9,6 +9,7 @@ import { organizerRouter } from './events/routes.js';
 import { showcaseRouter } from './events/showcase.js';
 import { ticketsRouter } from './tickets/routes.js';
 import { partnerRouter } from './partner/routes.js';
+import { cancellationRouter } from './cancellation/routes.js';
 import './gateway/worker.js'; // registra o job 'gateway-worker' (F03)
 import './tickets/capacity-validator.js'; // validador de lotação R03 no gancho de edição de F02 (F03)
 
@@ -37,6 +38,7 @@ export function createApp() {
   app.use(organizerRouter); // /organizer, /organizer/events[/:id[/publish]] (F02)
   app.use(ticketsRouter); // POST /events/:id/purchase, GET /my-tickets (F03)
   app.use('/api/partner', partnerRouter); // API de parceiros, JSON + X-Api-Key (F04)
+  app.use(cancellationRouter); // POST /organizer/events/:id/cancel + seção 'cancel' da gestão (F06)
 
   // --- 404 e erros ----------------------------------------------------------
   app.use((req, res) => {
