@@ -4,7 +4,8 @@
 //
 // - id: identificador único (registrar de novo o mesmo id substitui a seção);
 // - order: posição (menor primeiro); as seções aparecem depois dos dados/edição do evento;
-// - render: retorna SafeHtml (html``), string já escapada ou null/'' para não mostrar nada.
+// - render: retorna SafeHtml (html``, preferível: escapa os dados), string com HTML já escapado (inserida
+//   sem escape) ou null/'' para não mostrar nada. Pode ser async.
 //   Recebe o evento (linha de events), a requisição e a mensagem de aviso exibida na página (ou null).
 // Ordens usadas: painel (F05) 10, check-in (F05) 20, cancelamento (F06) 90.
 

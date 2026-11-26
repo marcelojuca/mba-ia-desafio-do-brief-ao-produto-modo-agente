@@ -1,4 +1,4 @@
-import { html, formatBRL, formatDateTime, toDateTimeLocal } from '../web/html.js';
+import { html, raw, formatBRL, formatDateTime, toDateTimeLocal } from '../web/html.js';
 import { render } from '../web/layout.js';
 import { readFlash } from '../web/flash.js';
 import { listManagementSections } from './management-sections.js';
@@ -74,7 +74,9 @@ export async function renderManagementPage(req, res, { status = 200, notice = nu
   const sectionsHtml = [];
   for (const section of listManagementSections()) {
     const out = await section.render({ event, req, flash: shownNotice });
-    if (out) sectionsHtml.push(html`<section data-section="${section.id}">${out}</section>`);
+    // string = HTML já pronto (gerado pela própria seção); prefira html`` para escapar dados.
+    const content = typeof out === 'string' ? raw(out) : out;
+    if (out) sectionsHtml.push(html`<section data-section="${section.id}">${content}</section>`);
   }
 
   render(res, {
