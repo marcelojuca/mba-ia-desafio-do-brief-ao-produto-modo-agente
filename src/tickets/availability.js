@@ -32,3 +32,18 @@ export async function getAvailability(eventId, client = null) {
   if (!rows[0]) return null;
   return computeAvailability(rows[0], rows[0].occupied);
 }
+
+// Disponibilidade de vários eventos (linhas de events) numa consulta só → Map(eventId → { capacity, occupied, available }).
+export async function getAvailabilityForEvents(events) {
+  const map = new Map();
+  if (!events.length) return map;
+  const { rows } = await pool.query(
+    `select event_id, count(*)::int as n from tickets
+      where event_id = any($1::text[]) and status = any($2::text[])
+      group by event_id`,
+    [events.map((e) => e.id), SEAT_HOLDING_STATUSES],
+  );
+  const occupied = new Map(rows.map((r) => [r.event_id, r.n]));
+  for (const e of events) map.set(e.id, computeAvailability(e, occupied.get(e.id) || 0));
+  return map;
+}
