@@ -1,0 +1,32 @@
+# Quality gates isolados: ./scripts/gates.sh
+# Projeto próprio (catraca-gates), banco próprio em tmpfs, nenhuma porta publicada no host.
+name: catraca-gates
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: catraca
+      POSTGRES_PASSWORD: catraca
+      POSTGRES_DB: catraca_test
+      TZ: America/Sao_Paulo
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U catraca -d catraca_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  tests:
+    build: .
+    environment:
+      NODE_ENV: test
+      DATABASE_URL: postgres://catraca:catraca@db:5432/catraca_test
+      PARTNER_API_KEY: catraca-parceiro-dev
+      GATEWAY_DELAY_SCALE: "0.01"
+      TZ: America/Sao_Paulo
+    command: ["sh", "-c", "npm run check && npm test"]
+    depends_on:
+      db:
+        condition: service_healthy
