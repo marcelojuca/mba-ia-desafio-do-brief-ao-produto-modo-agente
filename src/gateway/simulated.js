@@ -5,9 +5,9 @@ import { config } from '../config.js';
 //   decide(cardNumber, random = Math.random, scale = config.gatewayDelayScale) → { outcome, delayMs }
 //
 // Decisão pelo final do cartão; atraso sorteado na faixa × GATEWAY_DELAY_SCALE (padrão 1).
-// O teto de 4800 ms para 0001 deixa folga para o intervalo do worker ("confirmado em até 5 s").
+// O teto de 4000 ms para 0001 deixa folga para o intervalo do worker ("confirmado em até 5 s").
 export const GATEWAY_TABLE = Object.freeze({
-  '0001': { outcome: 'approved', minMs: 2000, maxMs: 4800 },
+  '0001': { outcome: 'approved', minMs: 2000, maxMs: 4000 },
   '0002': { outcome: 'declined', minMs: 2000, maxMs: 5000 },
   '0003': { outcome: 'approved', minMs: 30000, maxMs: 40000 },
   '0004': { outcome: 'declined', minMs: 30000, maxMs: 40000 },
