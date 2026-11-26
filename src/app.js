@@ -4,6 +4,8 @@ import { cookieParser } from './web/cookies.js';
 import { html } from './web/html.js';
 import { render, renderError } from './web/layout.js';
 import { homeRouter } from './web/home.js';
+import { loadSession } from './auth/sessions.js';
+import { authRouter } from './auth/routes.js';
 
 // createApp(): registro central da aplicação. Toda feature nova monta seus routers aqui.
 export function createApp() {
@@ -22,8 +24,10 @@ export function createApp() {
 
   app.use(express.urlencoded({ extended: false, limit: '100kb' }));
   app.use(cookieParser);
+  app.use(loadSession); // req.user
 
   // --- routers das features -------------------------------------------------
+  app.use(authRouter); // /signup, /login, /logout
   app.use(homeRouter); // GET / — placeholder da vitrine (F02 substitui)
 
   // --- 404 e erros ----------------------------------------------------------
