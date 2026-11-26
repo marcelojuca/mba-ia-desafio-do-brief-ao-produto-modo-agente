@@ -43,6 +43,21 @@ Participantes também podem criar a própria conta em `/signup`. Organizadores e
 rascunho), editar e publicar cada um na página de gestão `/organizer/events/:id`. Só eventos publicados aparecem na
 vitrine (`/`). Cada organizador vê e opera apenas os próprios eventos.
 
+## API de parceiros
+
+JSON em `/api/partner`, autenticada pelo header `X-Api-Key: catraca-parceiro-dev` (sem chave ou errada → `401 {"error":"unauthorized"}`).
+
+```bash
+API=http://localhost:3000; KEY=catraca-parceiro-dev
+curl -s "$API/api/partner/events" -H "X-Api-Key: $KEY"
+# → [{"id":"evt_...","name":"...","startsAt":"2026-12-05T21:00:00-03:00","priceCents":10000,"availableSeats":2}]
+curl -s -X POST "$API/api/partner/events/<eventId>/purchases" -H "X-Api-Key: $KEY" \
+  -H "Content-Type: application/json" -d '{"buyerEmail":"cliente@example.com","cardNumber":"4000000000000001"}'
+# → 202 {"ticketId":"tkt_...","code":"K7Q2M9XA","status":"pending"} | 422 invalid_request | 404 event_not_available | 409 sold_out
+curl -s "$API/api/partner/tickets/<ticketId>" -H "X-Api-Key: $KEY"
+# → {"ticketId":"tkt_...","code":"...","eventId":"evt_...","status":"confirmed","checkedIn":false} | 404 ticket_not_found
+```
+
 ## Configuração
 
 | Variável | Padrão | Uso |
