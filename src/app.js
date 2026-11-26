@@ -8,6 +8,7 @@ import { authRouter } from './auth/routes.js';
 import { organizerRouter } from './events/routes.js';
 import { showcaseRouter } from './events/showcase.js';
 import { ticketsRouter } from './tickets/routes.js';
+import { checkinRouter } from './checkin/routes.js';
 import './gateway/worker.js'; // registra o job 'gateway-worker' (F03)
 import './tickets/capacity-validator.js'; // validador de lotação R03 no gancho de edição de F02 (F03)
 
@@ -35,6 +36,7 @@ export function createApp() {
   app.use(showcaseRouter); // GET / — vitrine pública (F02)
   app.use(organizerRouter); // /organizer, /organizer/events[/:id[/publish]] (F02)
   app.use(ticketsRouter); // POST /events/:id/purchase, GET /my-tickets (F03)
+  app.use(checkinRouter); // POST /organizer/events/:id/checkin + seção de check-in (F05)
 
   // --- 404 e erros ----------------------------------------------------------
   app.use((req, res) => {
