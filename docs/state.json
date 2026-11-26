@@ -92,10 +92,12 @@
       ],
       "folder": "docs/features/F06-cancelamento",
       "branch": "feat/F06-cancelamento",
-      "status": "evaluating",
-      "pr": null,
-      "latest_report": null,
-      "reports": []
+      "status": "done",
+      "pr": "https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/5",
+      "latest_report": "docs/features/F06-cancelamento/eval-report-2026-11-26T01-14-13Z.md",
+      "reports": [
+        "docs/features/F06-cancelamento/eval-report-2026-11-26T01-14-13Z.md"
+      ]
     },
     "F07": {
       "name": "Integração ponta a ponta",
