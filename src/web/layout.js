@@ -17,6 +17,9 @@ const STYLE = `
   .notice { background: #e8f4ea; border: 1px solid #9c9; padding: 8px 12px; border-radius: 4px; }
   .error { background: #fdecec; border: 1px solid #e99; padding: 8px 12px; border-radius: 4px; }
   .field-error { color: #b00020; font-size: .9em; margin: 4px 0 0; }
+  article.event { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 8px 16px; margin: 12px 0; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; }
+  dd { margin: 0; }
   table { border-collapse: collapse; width: 100%; }
   th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #ddd; }
 `;
