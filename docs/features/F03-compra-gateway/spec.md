@@ -54,13 +54,13 @@ Como a edição de lotação (validador R03) e o cancelamento (F06) também pega
 
 | Final | outcome | delay |
 |---|---|---|
-| `0001` | approved | 2000–4800 ms |
+| `0001` | approved | 2000–4000 ms |
 | `0002` | declined | 2000–5000 ms |
 | `0003` | approved | 30000–40000 ms |
 | `0004` | declined | 30000–40000 ms |
 | outro | declined | 2000–5000 ms |
 
-  `delayMs` final = sorteio × `config.gatewayDelayScale` (`GATEWAY_DELAY_SCALE`, padrão `1`; só os testes usam valor menor). O teto 4800 ms para 0001 deixa folga para o intervalo do worker e mantém o "confirmado em até 5 s".
+  `delayMs` final = sorteio × `config.gatewayDelayScale` (`GATEWAY_DELAY_SCALE`, padrão `1`; só os testes usam valor menor). O teto 4000 ms para 0001 (ajustado após a avaliação de F07, que viu confirmações em 4,6–4,9 s) deixa folga para o intervalo do worker e mantém o "confirmado em até 5 s".
 - `worker.js` — job registrado em `registerBackgroundJob` (F01). A cada 200 ms (e também num `setTimeout` agendado para o `respond_at` de cada compra recém-criada), numa transação: `SELECT ... FROM payment_attempts WHERE processed_at IS NULL AND respond_at <= now() ORDER BY respond_at FOR UPDATE SKIP LOCKED LIMIT 50`; para cada uma, `UPDATE tickets SET status = <confirmed|declined>, updated_at = now() WHERE id = $1 AND status = 'pending'` e marca `processed_at`. O `AND status = 'pending'` é a guarda de R11: resposta que chega depois de o ingresso virar `cancelled`/`refunded` não muda nada. Como a resposta está persistida, reiniciar o app não perde respostas.
 - Exporta `startGatewayWorker()` / `stopGatewayWorker()` (testes) e `processDueAttempts()` (chamável nos testes).
 

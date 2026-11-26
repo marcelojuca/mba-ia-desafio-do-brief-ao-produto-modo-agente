@@ -6,7 +6,7 @@ const card = (last4) => `400000000000${last4}`;
 
 describe('gateway simulado — tabela de finais', () => {
   const cases = [
-    ['0001', 'approved', 2000, 4800],
+    ['0001', 'approved', 2000, 4000],
     ['0002', 'declined', 2000, 5000],
     ['0003', 'approved', 30000, 40000],
     ['0004', 'declined', 30000, 40000],
@@ -27,8 +27,8 @@ describe('gateway simulado — tabela de finais', () => {
     });
   }
 
-  test('0001 confirma com folga para "até 5 s" (teto 4800 ms)', () => {
-    assert.ok(gatewayRule(card('0001')).maxMs <= 4800);
+  test('0001 confirma com folga para "até 5 s" (teto 4000 ms)', () => {
+    assert.ok(gatewayRule(card('0001')).maxMs <= 4000);
   });
 
   test('escala multiplica o atraso (GATEWAY_DELAY_SCALE)', () => {

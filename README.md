@@ -121,11 +121,16 @@ avaliador) e `eval-report-*.md` (relatórios de avaliação, imutáveis):
 | F04 API de parceiros | [`docs/features/F04-api-parceiros/`](docs/features/F04-api-parceiros/) | 4 (paralela) | [#4](https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/4) |
 | F05 Check-in e painel | [`docs/features/F05-checkin-painel/`](docs/features/F05-checkin-painel/) | 4 (paralela) | [#6](https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/6) |
 | F06 Cancelamento de evento | [`docs/features/F06-cancelamento/`](docs/features/F06-cancelamento/) | 4 (paralela) | [#5](https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/5) |
-| F07 Integração ponta a ponta | [`docs/features/F07-integracao-e2e/`](docs/features/F07-integracao-e2e/) | 5 | — |
+| F07 Integração ponta a ponta | [`docs/features/F07-integracao-e2e/`](docs/features/F07-integracao-e2e/) | 5 | [#7](https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/7) |
 
 PRs da wave paralela (wave 4): [#4 — F04 API de parceiros](https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/4),
 [#5 — F06 Cancelamento](https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/5),
 [#6 — F05 Check-in e painel](https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/6).
+As três branches foram implementadas ao mesmo tempo em worktrees separadas (`.worktrees/<feature>`); o primeiro commit de
+cada uma (19:07:00–19:07:04) é anterior ao último commit das outras (19:08:50–19:10:03).
+
+Correção pós-integração: [#8 — margem do cartão 0001](https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/8)
+(atraso 2000–4000 ms, apontado pela avaliação de F07), reavaliado em F03.
 
 Código: `src/` (um módulo por domínio — `auth`, `events`, `tickets`, `gateway`, `partner`, `checkin`, `panel`,
 `cancellation`, `web`, `db`), testes em `test/` (`node:test`), scripts em `scripts/`.
