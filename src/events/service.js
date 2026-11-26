@@ -6,7 +6,7 @@ import { runEditValidators } from './edit-validators.js';
 
 // Resultados: { ok: true, event } | { ok: false, status, errors?, message? }
 //   status 422 → errors por campo (R01) e/ou message (validadores registrados)
-//   status 409 → transição não permitida (evento cancelado, publicar fora de rascunho)
+//   status 409 → transição não permitida (evento cancelado, publicar fora de rascunho); event = linha atual
 //   status 404 → evento sumiu
 
 export const CANCELLED_EDIT_MESSAGE = 'Evento cancelado não pode ser editado';
@@ -27,7 +27,7 @@ export async function editEvent(event, input, now = new Date()) {
   return withTransaction(async (client) => {
     const current = await lockEvent(client, event.id);
     if (!current) return { ok: false, status: 404 };
-    if (current.status === 'cancelled') return { ok: false, status: 409, message: CANCELLED_EDIT_MESSAGE };
+    if (current.status === 'cancelled') return { ok: false, status: 409, message: CANCELLED_EDIT_MESSAGE, event: current };
 
     const { value, errors } = parseEventInput(input, now);
     if (errors) return { ok: false, status: 422, errors };
@@ -47,7 +47,7 @@ export async function publishEvent(event) {
     if (!current) return { ok: false, status: 404 };
     if (current.status !== 'draft') {
       const message = current.status === 'cancelled' ? CANCELLED_PUBLISH_MESSAGE : PUBLISH_CONFLICT_MESSAGE;
-      return { ok: false, status: 409, message };
+      return { ok: false, status: 409, message, event: current };
     }
     const updated = await setEventPublished(current.id, client);
     return { ok: true, event: updated };

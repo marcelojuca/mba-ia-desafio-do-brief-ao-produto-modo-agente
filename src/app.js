@@ -6,6 +6,7 @@ import { render, renderError } from './web/layout.js';
 import { homeRouter } from './web/home.js';
 import { loadSession } from './auth/sessions.js';
 import { authRouter } from './auth/routes.js';
+import { organizerRouter } from './events/routes.js';
 
 // createApp(): registro central da aplicação. Toda feature nova monta seus routers aqui.
 export function createApp() {
@@ -29,6 +30,7 @@ export function createApp() {
   // --- routers das features -------------------------------------------------
   app.use(authRouter); // /signup, /login, /logout
   app.use(homeRouter); // GET / — placeholder da vitrine (F02 substitui)
+  app.use(organizerRouter); // /organizer, /organizer/events[/:id[/publish]] (F02)
 
   // --- 404 e erros ----------------------------------------------------------
   app.use((req, res) => {
