@@ -11,6 +11,7 @@ import { ticketsRouter } from './tickets/routes.js';
 import { checkinRouter } from './checkin/routes.js';
 import './gateway/worker.js'; // registra o job 'gateway-worker' (F03)
 import './tickets/capacity-validator.js'; // validador de lotação R03 no gancho de edição de F02 (F03)
+import './panel/section.js'; // seção 'panel' da página de gestão (F05)
 
 // createApp(): registro central da aplicação. Toda feature nova monta seus routers aqui.
 export function createApp() {
