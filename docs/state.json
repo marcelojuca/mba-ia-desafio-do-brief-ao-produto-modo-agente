@@ -48,9 +48,13 @@
       "branch": "feat/F03-compra-gateway",
       "status": "done",
       "pr": "https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/3",
-      "latest_report": "docs/features/F03-compra-gateway/eval-report-2026-11-26T01-04-35Z.md",
+      "latest_report": "docs/features/F03-compra-gateway/eval-report-2026-11-26T01-44-53Z.md",
       "reports": [
-        "docs/features/F03-compra-gateway/eval-report-2026-11-26T01-04-35Z.md"
+        "docs/features/F03-compra-gateway/eval-report-2026-11-26T01-04-35Z.md",
+        "docs/features/F03-compra-gateway/eval-report-2026-11-26T01-44-53Z.md"
+      ],
+      "fixes": [
+        "https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/8"
       ]
     },
     "F04": {
