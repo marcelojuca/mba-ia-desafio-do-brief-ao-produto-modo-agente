@@ -10,8 +10,10 @@ import { showcaseRouter } from './events/showcase.js';
 import { ticketsRouter } from './tickets/routes.js';
 import { partnerRouter } from './partner/routes.js';
 import { cancellationRouter } from './cancellation/routes.js';
+import { checkinRouter } from './checkin/routes.js';
 import './gateway/worker.js'; // registra o job 'gateway-worker' (F03)
 import './tickets/capacity-validator.js'; // validador de lotação R03 no gancho de edição de F02 (F03)
+import './panel/section.js'; // seção 'panel' da página de gestão (F05)
 
 // createApp(): registro central da aplicação. Toda feature nova monta seus routers aqui.
 export function createApp() {
@@ -39,6 +41,7 @@ export function createApp() {
   app.use(ticketsRouter); // POST /events/:id/purchase, GET /my-tickets (F03)
   app.use('/api/partner', partnerRouter); // API de parceiros, JSON + X-Api-Key (F04)
   app.use(cancellationRouter); // POST /organizer/events/:id/cancel + seção 'cancel' da gestão (F06)
+  app.use(checkinRouter); // POST /organizer/events/:id/checkin + seção de check-in (F05)
 
   // --- 404 e erros ----------------------------------------------------------
   app.use((req, res) => {
