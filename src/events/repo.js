@@ -26,8 +26,9 @@ export async function updateEvent(id, { name, startsAt, venue, capacity, priceCe
 }
 
 // Só draft → published. Retorna a linha atualizada ou null se o status não era draft.
-export async function setEventPublished(id) {
-  const { rows } = await query(
+export async function setEventPublished(id, client = null) {
+  const runner = client || { query };
+  const { rows } = await runner.query(
     `update events set status = 'published', updated_at = now()
       where id = $1 and status = 'draft'
       returning *`,
