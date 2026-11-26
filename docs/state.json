@@ -111,10 +111,12 @@
       ],
       "folder": "docs/features/F07-integracao-e2e",
       "branch": "feat/F07-integracao-e2e",
-      "status": "pending",
-      "pr": null,
-      "latest_report": null,
-      "reports": []
+      "status": "done",
+      "pr": "https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/7",
+      "latest_report": "docs/features/F07-integracao-e2e/eval-report-2026-11-26T01-37-31Z.md",
+      "reports": [
+        "docs/features/F07-integracao-e2e/eval-report-2026-11-26T01-37-31Z.md"
+      ]
     }
   }
 }
