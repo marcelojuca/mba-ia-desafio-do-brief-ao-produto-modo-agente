@@ -7,6 +7,7 @@ import { loadSession } from './auth/sessions.js';
 import { authRouter } from './auth/routes.js';
 import { organizerRouter } from './events/routes.js';
 import { showcaseRouter } from './events/showcase.js';
+import './gateway/worker.js'; // registra o job 'gateway-worker' (F03)
 
 // createApp(): registro central da aplicação. Toda feature nova monta seus routers aqui.
 export function createApp() {
