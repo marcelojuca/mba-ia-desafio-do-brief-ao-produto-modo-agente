@@ -39,6 +39,10 @@ Chave da API de parceiros (header `X-Api-Key`): `catraca-parceiro-dev` (variáve
 
 Participantes também podem criar a própria conta em `/signup`. Organizadores existem só pela seed.
 
+Área do organizador: entre como organizador e acesse `/organizer` ("Meus eventos") para criar eventos (nascem como
+rascunho), editar e publicar cada um na página de gestão `/organizer/events/:id`. Só eventos publicados aparecem na
+vitrine (`/`). Cada organizador vê e opera apenas os próprios eventos.
+
 ## Configuração
 
 | Variável | Padrão | Uso |

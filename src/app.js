@@ -3,9 +3,10 @@ import { query } from './db/pool.js';
 import { cookieParser } from './web/cookies.js';
 import { html } from './web/html.js';
 import { render, renderError } from './web/layout.js';
-import { homeRouter } from './web/home.js';
 import { loadSession } from './auth/sessions.js';
 import { authRouter } from './auth/routes.js';
+import { organizerRouter } from './events/routes.js';
+import { showcaseRouter } from './events/showcase.js';
 
 // createApp(): registro central da aplicação. Toda feature nova monta seus routers aqui.
 export function createApp() {
@@ -28,7 +29,8 @@ export function createApp() {
 
   // --- routers das features -------------------------------------------------
   app.use(authRouter); // /signup, /login, /logout
-  app.use(homeRouter); // GET / — placeholder da vitrine (F02 substitui)
+  app.use(showcaseRouter); // GET / — vitrine pública (F02)
+  app.use(organizerRouter); // /organizer, /organizer/events[/:id[/publish]] (F02)
 
   // --- 404 e erros ----------------------------------------------------------
   app.use((req, res) => {
