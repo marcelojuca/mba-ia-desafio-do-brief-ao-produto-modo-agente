@@ -1,0 +1,25 @@
+{
+  "name": "catraca",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Catraca — MVP de venda de ingressos para eventos pequenos",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "check": "node scripts/check.mjs",
+    "test": "node --test --test-concurrency=1 \"test/**/*.test.js\"",
+    "migrate": "node src/db/migrate.js",
+    "seed": "node src/db/seed.js",
+    "up": "./scripts/up.sh",
+    "down": "./scripts/down.sh",
+    "gates": "./scripts/gates.sh",
+    "e2e": "node scripts/e2e-flow.mjs"
+  },
+  "dependencies": {
+    "express": "^4.22.3",
+    "pg": "^8.23.1"
+  }
+}
