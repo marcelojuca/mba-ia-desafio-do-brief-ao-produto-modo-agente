@@ -15,10 +15,12 @@
       "depends_on": [],
       "folder": "docs/features/F01-fundacao-contas",
       "branch": "feat/F01-fundacao-contas",
-      "status": "pending",
-      "pr": null,
-      "latest_report": null,
-      "reports": []
+      "status": "done",
+      "pr": "https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/1",
+      "latest_report": "docs/features/F01-fundacao-contas/eval-report-2026-11-26T00-40-04Z.md",
+      "reports": [
+        "docs/features/F01-fundacao-contas/eval-report-2026-11-26T00-40-04Z.md"
+      ]
     },
     "F02": {
       "name": "Eventos do organizador e vitrine",
