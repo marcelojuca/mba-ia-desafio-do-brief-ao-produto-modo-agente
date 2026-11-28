@@ -170,6 +170,33 @@ com **um único** `UPDATE` com `CASE` (`confirmed → refunded`, `pending → ca
 um pendente no mesmo instante, o `UPDATE` espera o lock da linha e reavalia com o valor novo, sem janela para um
 pendente escapar como confirmado. `GATEWAY_DELAY_SCALE` acelera os atrasos só nos testes.
 
+### O ciclo: implementar, avaliar, corrigir
+
+```mermaid
+graph LR
+  P["PRD<br/>(docs/PRD.md)"] --> S["spec, plan, contract<br/>(uma wave)"]
+  S --> I["implementador<br/>(branch/worktree, gates)"]
+  I --> E["avaliador<br/>(contexto vazio, clone limpo)"]
+  E -->|item FAIL| F["correção<br/>(novo commit)"]
+  F --> E
+  E -->|tudo PASS| PR["PR → main"]
+  ST[("docs/state.json")] -.-> I
+  ST -.-> E
+  PR -.-> ST
+```
+
+| Papel | Lê | Escreve |
+|---|---|---|
+| Orquestrador (sessão principal) | Brief, R01–R13 | `docs/PRD.md`, `docs/state.json`; abre e integra os PRs |
+| Autor da spec (orquestrador) | Seção da feature no PRD + código da `main` | `docs/features/FXX-*/spec.md`, `plan.md`, `contract.md` |
+| Implementador (subagente) | spec, plan, contract, `AGENTS.md` | Código e testes, um commit `feat(FXX): <etapa>` por etapa do plano; `./scripts/gates.sh` verde |
+| Avaliador (subagente novo) | Só `contract.md` + o sistema rodando | `eval-report-<timestamp>.md` novo, veredito por item com evidência |
+| Correção | Relatório mais recente | Commit/PR de correção (ex.: [#8](https://github.com/marcelojuca/mba-ia-desafio-do-brief-ao-produto-modo-agente/pull/8)), seguido de nova avaliação |
+
+O avaliador nunca vê o raciocínio do implementador, só o contrato e o sistema de pé. Essa separação é o ponto: o
+contrato é o acordo entre o PRD e os agentes, e uma feature só vira `done` em `docs/state.json` com um relatório
+aprovado.
+
 ### Avaliação isolada
 
 Quem implementa nunca avalia. Cada feature foi avaliada por um **subagente novo do Claude Code, de contexto vazio**, a
