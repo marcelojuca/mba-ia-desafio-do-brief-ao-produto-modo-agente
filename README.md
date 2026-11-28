@@ -4,6 +4,8 @@ MVP de venda de ingressos para eventos pequenos, construído em modo agente: vit
 organizador, compra com gateway de pagamento simulado (assíncrono), check-in, painel, cancelamento e API de parceiros.
 Fonte da verdade: `docs/PRD.md`; estado das features: `docs/state.json`; instruções para agentes: `AGENTS.md`.
 
+Enunciado do desafio: [Do brief ao produto em modo agente (Full Cycle)](https://plataforma.fullcycle.com.br/courses/a091b0fe-a5c6-4287-a3d3-1ec61defcfd3/413/224/266/conteudos?projeto=70&fase=311).
+
 ## Como rodar
 
 Pré-requisitos: **Docker** (com Compose v2.17+) em execução, **Git** e **Node.js LTS** (22+). Não é preciso
